@@ -1,0 +1,8 @@
+# Ignore Python Environment
+__pycache__/
+venv/
+
+bonus_points_summary.xlsx
+
+# Ignore everything under the reports directory
+reports/*

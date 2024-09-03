@@ -8,6 +8,7 @@ MAX_STUDENTS_PER_REPORT = 20
 POINTS_FOR_BEING_IN_TOP = 5
 MAX_POINTS_PER_STUDENT = 50
 
+
 def get_rows_from_report(report_file):
     # Load the Excel workbook
     wb = openpyxl.load_workbook(report_file)
@@ -15,6 +16,7 @@ def get_rows_from_report(report_file):
 
     # Get all rows starting from the third row (to skip headers)
     return sheet.iter_rows(min_row=4, values_only=True)
+
 
 """
 report_rows = [
@@ -25,13 +27,15 @@ report_rows = [
     4. Incorrect Answers
 ]
 """
+
+
 def calculate_bonus_points(report_rows, points_dict):
     students_added = 0
 
     for row in report_rows:
         player = row[1].lower()
 
-        # Ensure username has the correct format
+        # Ensure username has the correct format of "firstname.lastname"
         if "." not in player:
             continue
 
@@ -41,12 +45,15 @@ def calculate_bonus_points(report_rows, points_dict):
 
         student_points = points_dict.get(player, 0)
 
-        # Check if the player is in the top 20 and has less than 50 points
+        # Check if the player is in the top k and has less than m points
         if student_points < MAX_POINTS_PER_STUDENT:
             # Calculate bonus points
-            bonus_points = min(MAX_POINTS_PER_STUDENT - student_points, POINTS_FOR_BEING_IN_TOP)
+            bonus_points = min(
+                MAX_POINTS_PER_STUDENT - student_points, POINTS_FOR_BEING_IN_TOP
+            )
             points_dict[player] = student_points + bonus_points
             students_added += 1
+
 
 def save_summary_to_excel(points_dict):
     # Sort the dictionary by keys (usernames)
@@ -69,6 +76,7 @@ def save_summary_to_excel(points_dict):
     result_wb.save(SUMMARY_FILE)
     print(f"Summary saved to {SUMMARY_FILE}")
 
+
 def main():
 
     # Directory containing reports
@@ -88,5 +96,6 @@ def main():
     # Save the summary to a single Excel file
     save_summary_to_excel(points_dict)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

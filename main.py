@@ -78,17 +78,13 @@ def save_summary_to_excel(points_dict):
 
 
 def main():
-
-    # Directory containing reports
-    reports_dir = REPORTS_DIR
-
     # Dictionary to store points for each student
     points_dict = {}
 
     # Process each report file in the directory
-    for filename in os.listdir(reports_dir):
+    for filename in os.listdir(REPORTS_DIR):
         if filename.endswith(".xlsx"):
-            report_file = os.path.join(reports_dir, filename)
+            report_file = os.path.join(REPORTS_DIR, filename)
             print(f"Processing {report_file}...")
             calculate_bonus_points(get_rows_from_report(report_file), points_dict)
             print()

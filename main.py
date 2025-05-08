@@ -21,7 +21,8 @@ def get_rows_from_report(report_file):
 """
 report_rows = [
     0. Rank	
-    1. Player	<-- we only care about this column
+    1. Player
+    2. Player Identifier    <-- we only care about this column
     2. Total Score (points)	
     3. Correct Answers	
     4. Incorrect Answers
@@ -33,7 +34,8 @@ def calculate_bonus_points(report_rows, points_dict):
     students_added = 0
 
     for row in report_rows:
-        player = row[1].lower()
+        print(f"Processing row: {row}")
+        player = row[2].lower()
 
         # Ensure username has the correct format of "firstname.lastname"
         if "." not in player:

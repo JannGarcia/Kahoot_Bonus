@@ -34,7 +34,6 @@ def calculate_bonus_points(report_rows, points_dict):
     students_added = 0
 
     for row in report_rows:
-        print(f"Processing row: {row}")
         player = row[2].lower()
 
         # Ensure username has the correct format of "firstname.lastname"

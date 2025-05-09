@@ -12,7 +12,7 @@ TEST_NAME = "john.doe"
 def create_report_row(player, rank=0):
     """Creates a report row with the given player and rank.
     Irrelevant data is set to 0, since they are not needed for the test."""
-    return (rank, player, 0, 0, 0)
+    return (rank, "name", player, 0, 0, 0)
 
 
 def create_report_rows_with_n_students(n):
